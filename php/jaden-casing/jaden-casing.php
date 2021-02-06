@@ -1,4 +1,6 @@
-<?php function toJadenCase($string)
+<?php
+
+function toJadenCase($string)
 {
     $jadenCase = ucwords($string);
     return $jadenCase;
