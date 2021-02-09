@@ -1,7 +1,7 @@
 <?php
 function high($x)
 {
-    $alphabet = 'abcdefghijklmopqrstuvwxyz';
+    $alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
     // Split each word into an indece
     $wordArr = explode(' ', $x);
@@ -18,7 +18,10 @@ function high($x)
         }
     }
 
+    print_r($wordBank);
     // find first instance of highest key and return key
     $highestWord = array_keys($wordBank, max($wordBank));
-    return $highestWord[0];
+    print_r($highestWord);
 }
+
+high('byevrg dxukwzd jknpxwifj');
