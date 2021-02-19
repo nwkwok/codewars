@@ -1,62 +1,55 @@
 <?php
 function getOrder($input)
 {
-    // Option #1 without helper functions
-    // loop through the string
-    $wordTracker = '';
     $output = '';
-    $orderBank = array(
-        'burger' => 0,
-        'fries' => 0,
-        'chicken' => 0,
-        'pizza' => 0,
-        'sandwich' => 0,
-        'onionrings' => 0,
-        'milkshake' => 0,
-        'coke' => 0
-    );
-
+    $orderTracker = array([], [], [], [], [], [], [], []);
+    $wordTracker = '';
     for ($i = 0; $i < strlen($input); $i++) {
         $wordTracker .= $input[$i];
+
         switch ($wordTracker) {
-            case 'burger':
-                $orderBank['burger'] += 1;
-                $wordtracker = '';
-                break;
-            case 'fries':
-                $orderBank['fries'] += 1;
+            case ('burger'):
+                $orderTracker[0][] = 'Burger';
                 $wordTracker = '';
                 break;
-            case 'chicken':
-                $orderBank['chicken'] += 1;
+            case ('fries'):
+                $orderTracker[1][] = 'Fries';
                 $wordTracker = '';
                 break;
-            case 'pizza':
-                $orderBank['pizza'][] = 'Pizza';
+            case ('chicken'):
+                $orderTracker[2][] = 'Chicken';
                 $wordTracker = '';
                 break;
-            case 'sandwich':
-                $orderBank['sandwich'] += 1;
+            case ('pizza'):
+                $orderTracker[3][] = 'Pizza';
                 $wordTracker = '';
                 break;
-            case 'onionrings':
-                $orderBank['onionrings'] += 1;
+            case ('sandwich'):
+                $orderTracker[4][] = 'Sandwich';
                 $wordTracker = '';
                 break;
-            case 'milkshake':
-                $orderBank['milkshake'] += 1;
+            case ('onionrings'):
+                $orderTracker[5][] = 'Onionrings';
                 $wordTracker = '';
                 break;
-            case 'coke':
-                $orderBank['coke'] += 1;
+            case ('milkshake'):
+                $orderTracker[6][] = 'Milkshake';
+                $wordTracker = '';
+                break;
+            case ('coke'):
+                $orderTracker[7][] = 'Coke';
                 $wordTracker = '';
                 break;
         }
     }
 
-    print_r($orderBank);
-    // word tracker
-    // when word tracker == string
-    // push tracker with first letter uppcased
-    // Loop through that array and append to an output. 
+    for ($i = 0; $i < count($orderTracker); $i++) {
+        if (!empty($orderTracker[$i])) {
+            foreach ($orderTracker[$i] as $item) {
+                $output .= "{$item} ";
+            }
+        }
+    }
+
+    return rtrim($output);
 }
