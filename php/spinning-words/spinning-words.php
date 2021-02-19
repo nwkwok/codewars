@@ -23,9 +23,7 @@ function spinWords(string $str): string
     // reverse and append to output
     // else continue
 
-
-
-
+    $str .= ' ';
     $currentWord = '';
     $output = '';
 
@@ -45,15 +43,17 @@ function spinWords(string $str): string
             if (strlen($currentWord) >= 5) {
                 // If string is greater than 5, reverse the string, append to output, reset string
                 $length = strlen($currentWord);
-                for ($i = 0, $j = $length - 1; $i < ($length / 2); $i++, $j--) {
-                    $t = $currentWord[$j];
-                    $currentWord[$j] = $currentWord[$i];
-                    $currentWord[$i] = $t;
+                for ($j = 0, $k = $length - 1; $j < ($length / 2); $j++, $k--) {
+                    $t = $currentWord[$k];
+                    $currentWord[$k] = $currentWord[$j];
+                    $currentWord[$j] = $t;
                 }
                 $output .= " {$currentWord}";
                 $currentWord = '';
             }
         }
     }
-    return $output;
+
+    $result = substr($output, 1);
+    return $result;
 }
