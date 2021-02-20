@@ -10,6 +10,10 @@ The kitchen staff are threatening to quit, because of how difficult it is to rea
 
 Their preference is to get the orders as a nice clean string with spaces and capitals like so:
 
+Input:
+"milkshakepizzachickenfriescokeburgerpizzasandwichmilkshakepizza"
+
+Output:
 "Burger Fries Chicken Pizza Pizza Pizza Sandwich Milkshake Milkshake Coke"
 
 The kitchen staff expect the items to be in the same order as they appear in the menu.
