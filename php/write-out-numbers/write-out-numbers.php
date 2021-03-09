@@ -41,46 +41,70 @@ function number2words(int $n)
     $output = '';
     $revInt = strrev(strval($n));
 
+    // Check if # in hundred thousand
     if (isset($revInt[5])) {
         if ($revInt[5] == 0 or !empty($revInt[5])) {
             $hundredThousand = $oneToTwenty[$revInt[5]];
-            $output .= $hundredThousand . ' ';
+            $output .= $hundredThousand . ' ' . 'hundred ';
         }
     }
-    if (isset($revInt[4])) {
-        if ($revInt[4] == 0 or !empty($revInt[4])) {
-            $tenThousand = $oneToTwenty[$revInt[4]];
-            $output .= $tenThousand . ' ';
-        }
-    }
-    if (isset($revInt[3])) {
 
+    // Check if # in ten thousand
+    if (isset($revInt[4])) {
+        // Hypenated # check > 20 and ones digit is > 0
+        if ($revInt[4] > 1 and $revInt[3] > 0) {
+            $tenThousand = $twentyToNinety[$revInt[4]] . '-' . $oneToTwenty[$revInt[3]];
+            $output .= $tenThousand . ' ' . 'thousand ';
+        }
+        if ($revInt[4] == 1) {
+            $tenThousand = $oneToTwenty[$revInt[4]] . ' ' . $oneToTwenty[$revInt[3]];
+            $output .= $tenThousand . ' ' . 'thousand ';
+        }
+    }
+
+    // Check if # in thousand
+    if (isset($revInt[3]) and !isset($tenThousand)) {
         if ($revInt[3] == 0 or !empty($revInt[3])) {
             $oneThousand = $oneToTwenty[$revInt[3]];
-            $output .= $oneThousand . ' ';
+            $output .= $oneThousand . ' ' . 'thousand ';
         }
     }
-    if (isset($revInt[2])) {
 
+    // Check hundreds
+    if (isset($revInt[2])) {
         if ($revInt[2] == 0 or !empty($revInt[2])) {
             $oneHundred = $oneToTwenty[$revInt[2]];
-            $output .= $oneHundred . ' ';
+            $output .= $oneHundred . ' ' . 'hundred ';
         }
     }
+
+    // Check tens
     if (isset($revInt[1])) {
+        // Hypenated # check > 20 and ones digit is > 0
+        if ($revInt[1] > 1 and $revInt[0] > 0) {
+            $ten = $twentyToNinety[$revInt[1]] . '-' . $oneToTwenty[$revInt[0]];
+            $output .= $ten;
+        }
+        if ($revInt[1] == 1 and $revInt[0] == 0) {
+            $ten = 'ten';
+            $output .= $ten;
+        }
 
-        if ($revInt[1] == 0 or !empty($revInt[1])) {
-            $ten = $oneToTwenty[$revInt[1]];
-            $output .= $ten . ' ';
+        if ($revInt[1] == 1 and $revInt[0] > 0) {
+            $ten = $oneToTwenty[$revInt[1]] . ' ' . $oneToTwenty[$revInt[0]];
+            $output .= $ten;
+        }
+        if ($revInt[1] == 1 and $revInt[0] == 0) {
+            $ten = $oneToTwenty[$revInt[1]] . ' ' . $oneToTwenty[$revInt[0]];
+            $output .= $ten;
         }
     }
-    if (isset($revInt[0])) {
-
+    if (isset($revInt[0]) and !isset($ten)) {
         if ($revInt[0] == 0 or !empty($revInt[0])) {
             $one = $oneToTwenty[$revInt[0]];
-            $output .= $one . ' ';
+            $output .= $one;
         }
     }
 
-    echo $output;
+    return $output;
 }
